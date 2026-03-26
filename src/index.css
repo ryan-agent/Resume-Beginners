@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 15% 5%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 15% 8%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 15% 8%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 200 100% 55%;
+    --primary-foreground: 220 15% 5%;
+
+    --secondary: 220 15% 12%;
+    --secondary-foreground: 210 15% 75%;
+
+    --muted: 220 12% 14%;
+    --muted-foreground: 215 10% 50%;
+
+    --accent: 170 80% 50%;
+    --accent-foreground: 220 15% 5%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 12% 14%;
+    --input: 220 12% 14%;
+    --ring: 200 100% 55%;
+
+    --radius: 0.75rem;
+
+    --hero-gradient: linear-gradient(135deg, hsl(220 15% 4%), hsl(220 20% 7%), hsl(220 15% 4%));
+    --section-alt: 220 15% 6%;
+    --heading-display: 210 20% 95%;
+    --text-subtle: 215 10% 45%;
+    --glow-primary: 200 100% 55% / 0.15;
+    --glow-accent: 170 80% 50% / 0.1;
+    --card-shadow: 0 4px 24px hsl(0 0% 0% / 0.3);
+    --card-hover-shadow: 0 8px 40px hsl(200 100% 55% / 0.1), 0 16px 48px hsl(0 0% 0% / 0.4);
+    --nav-bg: 220 15% 8% / 0.85;
+    --tech-icon-bg: 220 15% 10%;
+    --timeline-line: 200 100% 55%;
+
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 210 20% 80%;
+    --sidebar-primary: 200 100% 55%;
+    --sidebar-primary-foreground: 220 15% 5%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 12% 14%;
+    --sidebar-ring: 200 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  ::selection {
+    background: hsl(200 100% 55% / 0.3);
+    color: hsl(210 20% 95%);
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  .glass-card {
+    background: hsl(220 15% 8% / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(220 12% 16%);
+    border-radius: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    border-color: hsl(200 100% 55% / 0.3);
+    box-shadow: 0 0 30px hsl(200 100% 55% / 0.08), 0 8px 32px hsl(0 0% 0% / 0.3);
+    transform: translateY(-4px);
+  }
+
+  .tech-icon-badge {
+    @apply flex flex-col items-center gap-1.5 p-3 rounded-xl;
+    background: hsl(220 15% 10%);
+    border: 1px solid hsl(220 12% 16%);
+  }
+
+  .nav-glass {
+    background: hsl(var(--nav-bg));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .hero-name {
+    @apply text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em];
+    color: hsl(var(--foreground));
+    line-height: 0.9;
+  }
+
+  .hero-name-outline {
+    @apply text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-[-0.04em];
+    -webkit-text-stroke: 1.5px hsl(var(--foreground) / 0.4);
+    color: transparent;
+    line-height: 0.9;
+  }
+
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(200 100% 55% / 0.3), transparent, hsl(170 80% 50% / 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .nav-link-underline {
+    position: relative;
+  }
+
+  .nav-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: hsl(var(--primary));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(15px) rotate(-2deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 5s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(220 15% 5%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(220 12% 20%);
+  border-radius: 2px;
+}
+
+/* Infinite scroll for tech stack */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+/* Subtle background grid */
+.bg-grid {
+  background-image: 
+    linear-gradient(hsl(220 12% 12% / 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(220 12% 12% / 0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
